@@ -38,8 +38,18 @@ const App = () => {
     } ) )
   };
 
+  const handleSearch = ( e ) => {
+    const { value } = e.target;
+    const filteredPosts = posts.filter( post => {
+      return post.username.toLowerCase().includes( value.toLowerCase() );
+    });
+    const postsToUse = value ? filteredPosts : dummyData;
+    setPosts( postsToUse );
+  }
+
   return (
     <div className='App'>
+      <SearchBar onChange={ handleSearch } />
       <Posts likePost={ likePost } posts={ posts } />
     </div>
   );
